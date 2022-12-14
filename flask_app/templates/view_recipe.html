@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <title>Recipe</title>
+</head>
+
+<body>
+    <div class="container shadow mx-auto p-3 mb-5 bg-white rounded d-flex justify-content-between align-items-center">
+        <h1>
+            Welcome, {{logged_user.first_name}}
+        </h1>
+        <div>
+            <a href="/dashboard">Back to recipes</a> |
+            <a href="/users/logout">Logout</a>
+        </div>
+    </div>
+    <div class="container shadow mx-auto p-3 mb-5 bg-white rounded">
+        <div class="container d-flex justify-content-between align-items-center">
+            <h1>
+                {{one_recipe.name}}
+            </h1>
+            <div>
+                <h3>
+                    Posted by: {{one_recipe.creator.first_name}}
+                </h3>
+            </div>
+        </div>
+        <table class="table">
+            <tr>
+                <td>
+                    Description
+                </td>
+                <td>
+                    {{one_recipe.description}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Under 30 Minutes?
+                </td>
+                <td>
+                    {% if one_recipe.under == 1 %}True {%else%}False
+                    {%endif%}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Instructions
+                </td>
+                <td>
+                    {{one_recipe.instruction}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Date Made:
+                </td>
+                <td>
+                    {{one_recipe.created_at}}
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>

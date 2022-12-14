@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <title>New Recipe</title>
+</head>
+
+<body>
+    <div class="container">
+        <div
+            class="container shadow mx-auto p-3 my-4 bg-white rounded d-flex align-items-center justify-content-between">
+            <h1>Add a New Reicpe!</h1>
+            <div>
+                <a href="/dashboard">Back to recipes</a> |
+                <a href="/users/logout">Logout</a>
+            </div>
+        </div>
+        <div class="container">
+            <form action="/recipes/create" method="POST">
+                {% for message in get_flashed_messages(category_filter=["rec"])%}
+                <p class="text-danger">
+                    {{message}}
+                </p>
+                {%endfor%}
+                <div class="container d-flex justify-content-around align-items-center">
+                    <!-- Left col -->
+                    <div class="container shadow mx-auto p-3 mb-5 bg-white rounded col-5">
+                        <div class="mb-3">
+                            <label for="recipe_name">Name</label>
+                            <input type="text" name="recipe_name" id="recipe_name" class="input-group">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipe_description">Description</label>
+                            <textarea class="input-group" name="recipe_description" id="recipe_description" cols="25"
+                                rows="4"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipe_instructions">Instructions</label>
+                            <textarea class="input-group" name="recipe_instructions" id="recipe_instructions" cols="25"
+                                rows="4"></textarea>
+                        </div>
+                    </div>
+                    <!-- Right col -->
+                    <div class="container shadow mx-auto p-3 mb-5 bg-white rounded col-5">
+                        <div class="mb-3">
+                            <label for="recipe_created">Date Cooked/Made</label>
+                            <input type="date" name="recipe_created" id="recipe_created" class="input-group"
+                                value="{{now}}">
+                        </div>
+                        <div class="mb-3">
+                            <div>
+                                <p>Under 30 minutes?</p>
+                                <input type="radio" name="recipe_under" id="under" value="1" checked>Yes
+                                <input type="radio" name="recipe_under" id="over" value="0">No
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-dark">Create</button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>

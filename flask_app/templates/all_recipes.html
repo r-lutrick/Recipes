@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Recipes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="container shadow mx-auto p-3 mb-5 bg-white rounded">
+        <div class="d-flex align-items-center justify-content-between">
+            <h1>Welcome, {{one_user.first_name}} </h1>
+            <div>
+                <a href="/recipes/new">Create</a> |
+                <a href="/users/logout">Logout</a>
+            </div>
+        </div>
+    </div>
+    <div class="container shadow mx-auto p-3 mb-5 bg-white rounded">
+        <h4>All posted recipes</h4>
+        <table class="table border mb-4">
+            <thead class="table-dark m-2">
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Under 30 min
+                    </th>
+                    <th>
+                        Posted By
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {%if all_recipes%}
+                {% for recipe in all_recipes %}
+                <tr>
+                    <td>
+                        {{recipe.name}}
+                    </td>
+                    <td>
+                        {% if recipe.under == 1 %}True {%else%}False
+                        {%endif%}
+                    </td>
+                    <td>
+                        {{recipe.creator.first_name}}
+                    </td>
+                    <td>
+                        <a href="/recipes/{{recipe.id}}/view">View</a>
+                        {%if recipe.creator.id == one_user.id%}
+                        <a href="/recipes/{{recipe.id}}/edit"> | Edit</a>
+                        <a href="/recipes/{{recipe.id}}/remove"> | Delete</a>
+                        {%endif%}
+                    </td>
+                </tr>
+                {%endfor%}
+                {%endif%}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
