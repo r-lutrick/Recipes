@@ -67,8 +67,8 @@ class Recipe:
     @classmethod
     def create(cls, data):
         query = """
-            INSERT INTO recipes (name, description, instruction, under, created_at, user_id)
-            VALUE (%(name)s,%(description)s,%(instruction)s,%(under)s, %(created_at)s, %(user_id)s);
+            INSERT INTO recipes (name, description, ingredients, instruction, cuisine, course, dietary_preference, image, under, created_at, user_id)
+            VALUE (%(name)s, %(description)s, %(ingredients)s, %(instruction)s, %(cuisine)s, %(course)s, %(dietary_preference)s, %(image)s, %(under)s, %(created_at)s, %(user_id)s);
         """
         return MySQLConnection(DATABASE).query_db(query, data)
 
